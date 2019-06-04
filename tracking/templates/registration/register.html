@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+</head>
+
+<style>
+    .login-form {
+        margin: 0 auto;
+        padding-top: 5%;
+        padding-left: 29%;
+        padding-right: 29%;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+
+<body>
+
+    <div class="login-form ">
+        <h1>Account Registration</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <input class="form-control" type="text" name="username" required="required" 
+                placeholder="Username">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" required="required" placeholder="Password">
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col">
+                        <input class="form-control" type="text" name="first_name" required="required"
+                            placeholder="First Name">
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" name="last_name" required="required"
+                            placeholder="Last Name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="email" name="email" required="required" placeholder="Email">
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-success btn-block btn-lg">
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+
+        </form>
+
+    </div>
+</body>
+
+</html>

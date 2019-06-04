@@ -25,5 +25,21 @@ def login(request):
     else:
         return render(request, 'registration/login.html')
 
+def register(request):
+
+    if request.method == 'POST':
+        
+        print(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        email = request.POST['email']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+
+
+    else:
+        
+        return render (request, 'registration/register.html')
+
 def index(request):
     return render(request, 'application/index.html')
