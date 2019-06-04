@@ -32,6 +32,14 @@
         <form method="post">
             {% csrf_token %}
 
+            {% if email_error %}
+                <p class="error">Sorry, the email is already registered</p>
+            {% endif %}
+
+            {% if username_error %}
+                <p class="error">The Username is already taken</p>
+            {% endif %}
+
             <div class="form-group">
                 <input class="form-control" type="text" name="username" required="required" 
                 placeholder="Username">

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -36,7 +37,32 @@ def register(request):
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
 
+        search_username = User.objects.filter(username=username).exists()
+        search_email = User.objects.filter(email=email).exists()
 
+        print(search_username)
+        print(search_email)
+
+        email_error = False
+        username_error = False
+
+        if search_email or search_email:
+
+            if search_email:
+                email_error = True
+            if search_username:
+                username_error = True
+            print('going to render error')
+            print(email_error)
+            print(username_error)
+
+            return render(request, 'registration/register.html', {
+                "email_error": email_error,
+                "username_error": username_error
+            })
+        else:
+            pass
+            #success, the user doesn't already exist
     else:
         
         return render (request, 'registration/register.html')
