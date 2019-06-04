@@ -61,11 +61,22 @@ def register(request):
                 "username_error": username_error
             })
         else:
-            pass
+            User.objects.create_user(username=username,
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            password=password)
+
             #success, the user doesn't already exist
+
+            return redirect(reg_success)
     else:
         
         return render (request, 'registration/register.html')
+
+def reg_success(request):
+
+    return render(request, 'registration/success.html')
 
 def index(request):
     return render(request, 'application/index.html')
