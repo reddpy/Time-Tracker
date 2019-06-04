@@ -1,0 +1,14 @@
+.center-form {
+    margin: 0 auto;
+    padding-top: 5%;
+    padding-left: 29%;
+    padding-right: 29%;
+}
+.error{
+    color: red;
+}
+
+.center-body{
+    text-align: center;
+        padding-top: 5%;
+}
