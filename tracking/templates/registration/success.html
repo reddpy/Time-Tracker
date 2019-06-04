@@ -9,17 +9,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Bootstrap CSS -->
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/common.css' %}">
 </head>
 
-<style>
-    body{
-        text-align: center;
-        padding-top: 5%;
-    }
-    
-</style>
-
-<body class="d-flex justify-content-center">
+<body class=" center-body">
 
     <div class="success_container ">
         <h1>Success!</h1>
@@ -30,4 +25,5 @@
 
 </body>
 
+<script src="{% static '/js/success.js' %}"></script>
 </html>

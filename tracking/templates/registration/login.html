@@ -9,24 +9,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Bootstrap CSS -->
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/common.css' %}">
 </head>
-
-<style>
-    .login-form {
-        margin: 0 auto;
-        padding-top: 5%;
-        padding-left: 29%;
-        padding-right: 29%;
-    }
-
-    .error{
-        color: red;
-    }
-</style>
 
 <body>
 
-    <div class="login-form ">
+    <div class="center-form ">
 
         <form method="post">
             {% csrf_token %}
