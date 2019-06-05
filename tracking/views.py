@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
 
-def login(request):
+def login_view(request):
 
     if request.method == 'POST':
 
@@ -13,7 +13,7 @@ def login(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            auth_login(request, user)
+            login(request, user)
             # Redirect to a success page.
             return redirect (index)
 
@@ -26,11 +26,14 @@ def login(request):
     else:
         return render(request, 'registration/login.html')
 
+def logout_view(request):
+    logout(request) 
+    return redirect(login_view)
+
 def register(request):
 
     if request.method == 'POST':
         
-        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         email = request.POST['email']
@@ -39,9 +42,6 @@ def register(request):
 
         search_username = User.objects.filter(username=username).exists()
         search_email = User.objects.filter(email=email).exists()
-
-        print(search_username)
-        print(search_email)
 
         email_error = False
         username_error = False
@@ -52,10 +52,7 @@ def register(request):
                 email_error = True
             if search_username:
                 username_error = True
-            print('going to render error')
-            print(email_error)
-            print(username_error)
-
+        
             return render(request, 'registration/register.html', {
                 "email_error": email_error,
                 "username_error": username_error
@@ -78,5 +75,6 @@ def reg_success(request):
 
     return render(request, 'registration/success.html')
 
+@login_required
 def index(request):
     return render(request, 'application/index.html')
