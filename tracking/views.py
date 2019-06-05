@@ -79,6 +79,10 @@ def reg_success(request):
 def index(request):
 
     if request.method == 'POST':
-        print(request.POST)
+        
+        current_user = request.user
+        timeframe = request.POST['timeframe']
+        description = request.POST['description']
+
 
     return render(request, 'application/index.html')
