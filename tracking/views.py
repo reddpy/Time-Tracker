@@ -77,4 +77,8 @@ def reg_success(request):
 
 @login_required
 def index(request):
+
+    if request.method == 'POST':
+        print(request.POST)
+
     return render(request, 'application/index.html')
