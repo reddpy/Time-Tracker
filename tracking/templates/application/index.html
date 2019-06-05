@@ -19,6 +19,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+    {% load static %}
+    <script src="{% static '/js/stopwatch.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/css/common.css' %}">
+    <link rel="stylesheet" href="{% static '/css/stopwatch.css' %}">
+
 </head>
 
 <body>
@@ -31,17 +37,34 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                
+
                 <li class="nav-item">
                     <a class="nav-link" href="#">View</a>
                 </li>
-                
+
             </ul>
             <div class="form-inline my-2 my-lg-0">
                 <a class="btn btn-danger my-2 my-sm-0" href="/logout">Sign Out</a>
             </div>
         </div>
     </nav>
+
+    <div class="center-body" id="stopwatch">
+        <!-- <h1 id="output">00:00:00</h1> -->
+        <input id="output" type="text" name="lname" value="00:00:00" disabled>
+        <br>
+        <button class="btn btn-primary btn-lg" id="startPause" onclick="startPause()">Start</button>
+        <button class="btn btn-danger btn-lg" onclick="reset()">Reset</button>
+
+    </div>
+
+    <div class="center-stop" >
+        <textarea placeholder="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <br>
+        <button class="btn btn-success btn-block btn-lg" id="save">Save</button>
+    </div>
+
+
 </body>
 
 </html>
