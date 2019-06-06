@@ -20,7 +20,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Time Tracker</a>
+        <a class="navbar-brand" href="/home">Time Tracker</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,7 +30,7 @@
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/view-times">View</a>
+                    <a class="nav-link active" href="/view-times">View</a>
                 </li>
 
             </ul>
@@ -40,41 +40,35 @@
         </div>
     </nav>
 
-    <form method="post">
-        {%csrf_token%}
-        <div class="center-body" id="stopwatch">
-            <!-- <h1 id="output">00:00:00</h1> -->
-            <input id="output" type="text" name="timeframe" value="00:00:00" readonly>
-        </div>
+    <div class="center-body table-responsive" id="{{time.id}}timeContainer">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Timeframe</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Save Time (UTC)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for time in times%}
 
-        <div class="center-stop">
-            <textarea name="description" placeholder="Description" class="form-control" id="exampleFormControlTextarea1"
-                rows="3"></textarea>
-            <br>
-            <input type="submit" value=Save class="btn btn-success btn-block btn-lg" id="save"></input>
-        </div>
-
-    </form>
-
-    <div id="control-buttons" class="center-body center-stop">
+                <!-- <h1 id="output">00:00:00</h1> -->
+                <tr>
+                    <th scope="row">{{time.id}}</th>
+                    <td>{{time.timeframe}}</td>
+                    <td>{{time.description}}</td>
+                    <td>{{time.save_time}}</td>
+                </tr>
 
 
-        <div class="form-row">
-
-            <div class="col">
-                <button type="button" class="btn btn-primary btn-lg btn-block btn-lg" id="startPause"
-                    onclick="startPause()">Start</button>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-danger btn-lg btn-block btn-lg" onclick="reset()">Reset</button>
-            </div>
-
-        </div>
+                {%endfor%}
+            </tbody>
+        </table>
 
     </div>
 
 
-    <script src="{% static '/js/stopwatch.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from tracking.models import Times
 
 def login_view(request):
 
@@ -77,12 +77,28 @@ def reg_success(request):
 
 @login_required
 def index(request):
+    import datetime
 
     if request.method == 'POST':
         
         current_user = request.user
         timeframe = request.POST['timeframe']
         description = request.POST['description']
+        time = datetime.datetime.now()
 
+        new_time=Times(user=current_user, timeframe=timeframe, description=description, save_time=time)
+        new_time.save()
 
     return render(request, 'application/index.html')
+
+@login_required
+def view_times(request):
+    current_user = request.user
+
+    all_times = Times.objects.filter(user_id=current_user).order_by('-id')
+
+    print(all_times)
+
+    return render(request, 'application/view.html',{
+        "times": all_times
+    })
