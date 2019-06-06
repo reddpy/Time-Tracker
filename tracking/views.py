@@ -83,7 +83,7 @@ def index(request):
         
         current_user = request.user
         timeframe = request.POST['timeframe']
-        description = request.POST['description']
+        description = request.POST['description'].strip()
         time = datetime.datetime.now()
 
         new_time=Times(user=current_user, timeframe=timeframe, description=description, save_time=time)
@@ -95,9 +95,17 @@ def index(request):
 def view_times(request):
     current_user = request.user
 
-    all_times = Times.objects.filter(user_id=current_user).order_by('-id')
+    if request.method == 'POST':
+        data_id = request.POST['time_id']
+        new_desc = request.POST['description'].strip()
 
-    print(all_times)
+        time_obj = Times.objects.get(id=data_id)
+        time_obj.description = new_desc
+        time_obj.save()
+        
+        return redirect(view_times)
+
+    all_times = Times.objects.filter(user_id=current_user).order_by('-id')
 
     return render(request, 'application/view.html',{
         "times": all_times
