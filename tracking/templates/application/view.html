@@ -48,6 +48,8 @@
                     <th scope="col">Timeframe</th>
                     <th scope="col">Description</th>
                     <th scope="col">Save Time (UTC)</th>
+                    <th scope="col">View/Edit</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +61,50 @@
                     <td>{{time.timeframe}}</td>
                     <td>{{time.description}}</td>
                     <td>{{time.save_time}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#Modal{{time.id}}">
+                            View/Edit
+                        </button>
+                    </td>
                 </tr>
+
+                <!-- Button trigger modal -->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="Modal{{time.id}}" tabindex="1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabel{{time.id}}">Timeframe</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Timeframe: {{time.timeframe}}</p>
+                                <p>Saved Time (UTC): {{time.save_time}}</p>
+
+                                <form method="POST">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Description</span>
+                                        </div>
+                                        <textarea class="form-control"
+                                            aria-label="With textarea">{{time.description}}</textarea>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
 
 
                 {%endfor%}
