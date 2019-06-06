@@ -1,11 +1,14 @@
 var time = 0;
 var running = 0;
 
+document.getElementById('save').disabled=true;
+
 function startPause(){
 	if(running == 0){
 		running = 1;
 		increment();
 		document.getElementById("startPause").innerHTML = "Pause";
+		document.getElementById('save').disabled=false;
 	}else{
 		running = 0;
 		document.getElementById("startPause").innerHTML = "Resume";
@@ -17,6 +20,8 @@ function reset(){
 	time = 0;
 	document.getElementById("output").value = "00:00:00";
 	document.getElementById("startPause").innerHTML = "Start";
+	document.getElementById('save').disabled=true;
+
 };
 
 function increment(){
